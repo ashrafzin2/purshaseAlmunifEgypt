@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>المشتريات – شركة المنيف فرع مصر</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f5c5c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="مشتريات المنيف">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--bg:#f3f6f6;--card:#fff;--ink:#1d2b2b;--mut:#6b7c7c;--pri:#0f5c5c;--pri2:#1b8a8a;--line:#dfe8e8;--acc:#c99a2e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Tahoma,Arial,sans-serif;font-size:15px;padding-bottom:env(safe-area-inset-bottom)}
+header{background:var(--pri);color:#fff;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;position:sticky;top:0;z-index:20;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header h1{font-size:17px;margin:0;flex:1;min-width:180px}
+header .sub{font-size:12px;opacity:.85}
+button,select{font:inherit}
+.btn{background:#fff;color:var(--pri);border:0;border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:600}
+.btn.sec{background:rgba(255,255,255,.15);color:#fff}
+.btn.pri{background:var(--pri);color:#fff}
+.btn:active{opacity:.8}
+main{max-width:1300px;margin:auto;padding:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px}
+.card h2{font-size:15px;margin:0 0 10px;color:var(--pri)}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;align-items:end}
+.ms{position:relative}
+.ms>label{display:block;font-size:12px;color:var(--mut);margin-bottom:3px}
+.ms>.box{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;cursor:pointer;display:flex;justify-content:space-between;gap:6px;min-height:38px;align-items:center}
+.ms .box span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.ms .pop{display:none;position:absolute;z-index:30;top:100%;inset-inline:0;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px #0002;margin-top:3px}
+.ms.open .pop{display:block}
+.pop input[type=search]{width:calc(100% - 12px);margin:6px;padding:7px;border:1px solid var(--line);border-radius:6px;font:inherit}
+.pop .acts{display:flex;gap:6px;padding:0 6px 6px}
+.pop .acts button{flex:1;border:1px solid var(--line);background:#f7fafa;border-radius:6px;padding:4px;cursor:pointer}
+.pop .list{max-height:240px;overflow:auto}
+.pop .it{display:flex;gap:8px;align-items:center;padding:6px 10px;cursor:pointer;font-size:14px}
+.pop .it:hover{background:#eef6f6}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;border-inline-start:5px solid var(--pri2)}
+.kpi.main{background:var(--pri);color:#fff;border-color:var(--acc)}
+.kpi .l{font-size:12px;opacity:.8}.kpi .v{font-size:21px;font-weight:700;margin-top:4px;direction:ltr;text-align:right}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px}
+.chart{position:relative;height:300px}
+.tw{overflow:auto;max-height:420px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th{background:#eef5f5;color:var(--pri);position:sticky;top:0}
+td.n,th.n{text-align:left;direction:ltr}
+.tabs{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:#fff;border-radius:20px;padding:4px 12px;cursor:pointer}
+.tabs button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.status{font-size:12px;color:var(--mut);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.err.ok{background:#eefaf3;border-color:#a9dcbc;color:#14532d}
+.err{background:#fff3f0;border:1px solid #f0b8aa;color:#8a2c14;padding:10px;border-radius:8px;margin-bottom:10px;display:none}
+dialog{border:0;border-radius:12px;max-width:560px;width:92%;padding:16px}
+dialog::backdrop{background:#0006}
+dialog .row{display:grid;grid-template-columns:140px 1fr;gap:8px;margin:6px 0;align-items:center}
+dialog select,dialog input{width:100%;padding:6px;border:1px solid var(--line);border-radius:6px}
+#report{display:none;background:#fff;padding:14px;max-width:210mm;margin:auto}
+#report .bar{display:flex;gap:8px;margin-bottom:12px}
+#report h1{text-align:center;color:var(--pri);margin:0 0 6px;font-size:22px}
+#report .fl{text-align:center;font-size:13px;margin-bottom:10px;color:#333}
+#report h3{margin:14px 0 6px;color:var(--pri);font-size:14px;border-bottom:2px solid var(--pri)}
+#report img{max-width:100%}
+#report table{font-size:11px}
+#report tr{break-inside:avoid}
+body.rep #app{display:none}body.rep #report{display:block}
+@page{size:A4;margin:12mm}
+@media print{body{background:#fff}.noprint{display:none!important}#report{padding:0;max-width:none}#report th{position:static}}
+@media(max-width:600px){.kpi .v{font-size:18px}}
+</style>
+</head>
+<body>
+<div id="app">
+<header class="noprint">
+  <div style="flex:1;min-width:180px"><h1>المشتريات – شركة المنيف فرع مصر</h1><div class="sub" id="upd">جارٍ التحميل…</div></div>
+  <button class="btn sec" onclick="zoom(-1)" title="تصغير">A−</button>
+  <button class="btn sec" onclick="zoom(1)" title="تكبير">A+</button>
+  <input type="file" id="fi" accept=".xlsx,.xlsm,.xls" hidden onchange="importFile(this.files[0]);this.value=''">
+  <button class="btn sec" onclick="fi.click()">📂 تحديث الملف</button>
+  <button class="btn sec" onclick="exportData()" title="ينزّل data.js لرفعه على الاستضافة فتتحدث كل الأجهزة">⬇ ملف النشر</button>
+  <button class="btn" onclick="showReport()">🖨 طباعة</button>
+</header>
+<main>
+  <div class="err" id="err"></div>
+  <div class="card noprint"><div class="filters" id="filters"></div>
+    <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn pri" onclick="clearAll()">مسح كل الفلاتر</button><span id="cnt" style="font-size:13px;color:var(--mut)"></span></div></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="grid2">
+    <div class="card"><h2>إجمالي المشتريات لكل شهر (شامل الضريبة)</h2><div class="chart"><canvas id="c1"></canvas></div></div>
+    <div class="card"><h2>أكبر الموردين (قيمة التوريدات)</h2><div class="chart"><canvas id="c2"></canvas></div></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h2>ترتيب الموردين</h2><div class="tabs" data-t="sup"><button class="on" data-k="v">بالقيمة</button><button data-k="c">بعدد العمليات</button></div><div class="tw" id="tSup"></div></div>
+    <div class="card"><h2>أكثر قطع الغيار شراءً وتكراراً</h2><div class="tabs" data-t="part"><button class="on" data-k="c">بالتكرار</button><button data-k="q">بالكمية</button><button data-k="v">بالقيمة</button></div><div class="tw" id="tPart"></div></div>
+  </div>
+  <div class="card"><h2>أكبر عمليات الشراء</h2><div class="tw" id="tTop"></div></div>
+  <div class="card"><h2>تفاصيل العمليات (حسب الفلاتر)</h2><div class="tw" style="max-height:520px" id="tAll"></div></div>
+</main>
+</div>
+<div id="report"></div>
+<script src="chart.umd.js"></script>
+<script src="xlsx.mini.min.js"></script>
+<script>
+const SHEET_ID='16BvwoXBLYf5PoYTlIIMiQGiEsQ2IvL5b8U9b6SIXON4';
+const POLL_MS=60000;
+const FIELDS={date:'التاريخ',dept:'القسم',sup:'المورد',part:'قطعة الغيار / الصنف',qty:'الكمية',net:'القيمة قبل الضريبة',vat:'ضريبة القيمة المضافة',tot:'الإجمالي شامل الضريبة'};
+const FKEYS={dept:'القسم',mk:'الشهر',sup:'المورد',part:'قطعة الغيار'};
+const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Math.round(n||0).toLocaleString('en-US');
+const egp=n=>fmt(n)+' EGP';
+const dstr=d=>d?String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+d.getFullYear():'';
+let DS=null,recs=[],sel={dept:new Set(),mk:new Set(),sup:new Set(),part:new Set()},tabs={sup:'v',part:'c'},charts={},zl=+localStorage.getItem('zl')||0;
+
+/* ---------- البيانات (ملف Excel) ---------- */
+/*PARSE_START*/
+const norm=s=>String(s==null?'':s).replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[\u064B-\u0652\u0640]/g,'').replace(/\s+/g,' ').trim();
+const clean=s=>String(s==null?'':s).replace(/\s+/g,' ').trim();
+const num=v=>{if(v==null||v==='')return 0;if(typeof v==='number')return v;const x=parseFloat(String(v).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d.\-]/g,''));return isNaN(x)?0:x};
+const pad=n=>String(n).padStart(2,'0');
+function parseWorkbook(XL,buf){
+  const wb=XL.read(buf,{type:'array',cellDates:true});
+  for(const name of wb.SheetNames){
+    const a=XL.utils.sheet_to_json(wb.Sheets[name],{header:1,raw:true,defval:null});
+    const hi=a.findIndex(r=>r.some(c=>c!=null&&/المورد/.test(norm(c)))&&r.some(c=>c!=null&&/التاريخ/.test(norm(c))));
+    if(hi<0)continue;
+    const H=a[hi].map(norm),ix=re=>H.findIndex(h=>re.test(h));
+    const C={date:ix(/^التاريخ/),po:ix(/رقم طلب/),dept:ix(/^القسم/),desc:ix(/بيان/),part:ix(/قطع(ه)? الغيار/),ext:ix(/تصنيع/),sup:ix(/اسم المورد|^المورد/),qty:ix(/^العدد|^الكميه/),net:ix(/اجمالي السعر/),f:ix(/قيمه الضريبه/),tot:ix(/بعد الضريبه/)};
+    if(C.date<0||C.sup<0||(C.net<0&&C.tot<0))continue;
+    const rows=[];
+    for(const r of a.slice(hi+1)){
+      let dv=r[C.date];if(!(dv instanceof Date)||isNaN(dv))continue;
+      dv=new Date(dv.getTime()+6*36e5);
+      let net=num(r[C.net]),tot=num(r[C.tot]);const f=C.f>=0?num(r[C.f]):0;
+      if(!tot&&!net)continue;
+      if(!tot)tot=net*(f||1);if(!net)net=tot/(f||1);
+      rows.push({d:`${dv.getFullYear()}-${pad(dv.getMonth()+1)}-${pad(dv.getDate())}`,po:clean(r[C.po]),dept:clean(r[C.dept]),desc:clean(r[C.desc]),part:clean(r[C.part])||clean(r[C.ext])||clean(r[C.desc]),sup:clean(r[C.sup]),qty:num(r[C.qty]),net,tot});
+    }
+    if(rows.length)return {sheet:name,rows};
+  }
+  throw new Error('لم أجد جدول المشتريات في الملف (يجب وجود أعمدة: التاريخ، اسم المورد، اجمالى السعر، الاجمالى بعد الضريبة)');
+}
+/*PARSE_END*/
+function canon(rows,k){const c=new Map();rows.forEach(r=>{const n=norm(r[k]),m=c.get(n)||new Map();m.set(r[k],(m.get(r[k])||0)+1);c.set(n,m)});const b=new Map();c.forEach((m,n)=>b.set(n,[...m.entries()].sort((x,y)=>y[1]-x[1])[0][0]));rows.forEach(r=>r[k]=b.get(norm(r[k])))}
+function hydrate(ds){
+  const rows=ds.rows.map(r=>({...r}));
+  ['dept','sup','part'].forEach(k=>{rows.forEach(r=>{if(!r[k])r[k]='—'});canon(rows,k)});
+  recs=rows.map((r,i)=>{const p=r.d.split('-').map(Number);return {i,d:new Date(p[0],p[1]-1,p[2]),mk:r.d.slice(0,7),dept:r.dept,sup:r.sup,part:r.part,desc:r.desc,po:r.po,qty:r.qty,net:r.net,vat:r.tot-r.net,tot:r.tot}});
+  DS=ds;
+  Object.keys(sel).forEach(k=>{const o=new Set(opts(k));[...sel[k]].forEach(v=>{if(!o.has(v))sel[k].delete(v)})});
+  renderFilters();render();status();
+}
+const mkLabel=k=>k==='—'?k:MONTHS[+k.slice(5)-1]+' '+k.slice(0,4);
+const dt=d=>d?dstr(d)+' '+pad(d.getHours())+':'+pad(d.getMinutes()):'—';
+function status(){const mx=recs.reduce((m,r)=>r.d>m?r.d:m,0);$('upd').textContent=`المصدر: ${DS.name} · آخر تحديث: ${dt(new Date(DS.updated))} · آخر عملية شراء: ${dstr(new Date(mx))} · ${fmt(recs.length)} سجل`}
+function note(t,ok){const e=$('err');e.style.display='block';e.className='err'+(ok?' ok':'');e.textContent=t}
+async function importFile(file){
+  if(!file)return;
+  try{
+    const {sheet,rows}=parseWorkbook(XLSX,new Uint8Array(await file.arrayBuffer()));
+    const old=DS?DS.rows.length:0,ds={updated:new Date().toISOString(),name:file.name,sheet,rows};
+    try{localStorage.setItem('ds',JSON.stringify(ds))}catch(e){}
+    hydrate(ds);
+    const ds_=rows.map(r=>r.d).sort(),df=rows.length-old;
+    note(`تم تحديث البيانات من «${file.name}»: ${fmt(rows.length)} سجل (من ${ds_[0]} إلى ${ds_[ds_.length-1]}) — الفرق عن السابق: ${df>=0?'+':''}${df}. لتعميم التحديث على كل الأجهزة اضغط «ملف النشر» وارفع data.js على الاستضافة.`,true);
+  }catch(e){note('تعذر قراءة الملف: '+e.message)}
+}
+function exportData(){if(!DS)return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['window.EMBEDDED='+JSON.stringify(DS)+';'],{type:'text/javascript'}));a.download='data.js';a.click()}
+const loadScript=src=>new Promise(r=>{const s=document.createElement('script');s.src=src+'?t='+Date.now();s.onload=()=>r(true);s.onerror=()=>r(false);document.head.appendChild(s)});
+async function init(){
+  let local=null;try{local=JSON.parse(localStorage.getItem('ds'))}catch(e){}
+  await loadScript('data.js');
+  const emb=window.EMBEDDED||null,best=emb&&(!local||new Date(emb.updated)>=new Date(local.updated))?emb:local;
+  if(best)hydrate(best);else note('لا توجد بيانات بعد. اضغط «📂 تحديث الملف» واختر ملف المشتريات (Excel).');
+}
+
+/* ---------- الفلاتر ---------- */
+function opts(k){const m=new Map();recs.forEach(r=>m.set(r[k],(m.get(r[k])||0)+1));let a=[...m.keys()];a.sort(k==='mk'?undefined:(x,y)=>x.localeCompare(y,'ar'));return a}
+function renderFilters(){
+  $('filters').innerHTML=Object.keys(FKEYS).map(k=>`<div class="ms" id="ms_${k}"><label>${FKEYS[k]}</label><div class="box" onclick="togMs('${k}',event)"><span id="lb_${k}"></span><span>▾</span></div>
+  <div class="pop"><input type="search" placeholder="بحث…" oninput="listMs('${k}',this.value)"><div class="acts"><button onclick="allMs('${k}')">تحديد الكل</button><button onclick="noneMs('${k}')">مسح</button></div><div class="list" id="ls_${k}"></div></div></div>`).join('');
+  Object.keys(FKEYS).forEach(k=>{listMs(k,'');lbl(k)});
+}
+function listMs(k,q){q=(q||'').toLowerCase();$('ls_'+k).innerHTML=opts(k).filter(o=>(k==='mk'?mkLabel(o):o).toLowerCase().includes(q)).map(o=>`<label class="it"><input type="checkbox" ${sel[k].has(o)?'checked':''} onchange="pick('${k}',this)" data-v="${esc(o)}"> ${esc(k==='mk'?mkLabel(o):o)}</label>`).join('')}
+function pick(k,el){const v=el.dataset.v;el.checked?sel[k].add(v):sel[k].delete(v);lbl(k);render()}
+function lbl(k){const n=sel[k].size;$('lb_'+k).textContent=n?(n===1?(k==='mk'?mkLabel([...sel[k]][0]):[...sel[k]][0]):n+' محدد'):'الكل'}
+function togMs(k,e){e.stopPropagation();document.querySelectorAll('.ms').forEach(x=>x.id!=='ms_'+k&&x.classList.remove('open'));$('ms_'+k).classList.toggle('open')}
+function allMs(k){opts(k).forEach(o=>sel[k].add(o));listMs(k);lbl(k);render()}
+function noneMs(k){sel[k].clear();listMs(k);lbl(k);render()}
+function clearAll(){Object.keys(sel).forEach(k=>{sel[k].clear();listMs(k);lbl(k)});render()}
+document.addEventListener('click',e=>{if(!e.target.closest('.ms'))document.querySelectorAll('.ms').forEach(x=>x.classList.remove('open'))});
+const filtered=()=>recs.filter(r=>Object.keys(sel).every(k=>!sel[k].size||sel[k].has(r[k])));
+function filterText(){const a=Object.keys(sel).filter(k=>sel[k].size).map(k=>FKEYS[k]+': '+[...sel[k]].map(v=>k==='mk'?mkLabel(v):v).join('، '));return a.length?a.join(' | '):'بدون فلاتر (كل البيانات)'}
+
+/* ---------- التجميع والعرض ---------- */
+function groupBy(rows,key){const m=new Map();rows.forEach(r=>{const k=typeof key==='function'?key(r):r[key];const o=m.get(k)||{k,v:0,c:0,q:0};o.v+=r.tot;o.c++;o.q+=r.qty;m.set(k,o)});return [...m.values()]}
+function tbl(cols,rows){return `<table><thead><tr>${cols.map(c=>`<th class="${c[2]?'n':''}">${c[0]}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${cols.map(c=>`<td class="${c[2]?'n':''}">${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table>`}
+function data(){
+  const f=filtered(),T=a=>a.reduce((s,r)=>s+r.tot,0);
+  const mon=groupBy(f,'mk').sort((a,b)=>a.k<b.k?-1:1),sup=groupBy(f,'sup'),part=groupBy(f,'part');
+  const supS=[...sup].sort((a,b)=>tabs.sup==='c'?b.c-a.c||b.v-a.v:b.v-a.v);
+  const partS=[...part].sort((a,b)=>b[tabs.part]-a[tabs.part]||b.v-a.v);
+  return {f,tot:T(f),net:f.reduce((s,r)=>s+r.net,0),vat:f.reduce((s,r)=>s+r.vat,0),mon,sup,supS,partS,top:[...f].sort((a,b)=>b.tot-a.tot)};
+}
+const cSup=(D)=>[['#',(r)=>r._i],['المورد',r=>esc(r.k)],['القيمة (EGP)',r=>fmt(r.v),1],['العمليات',r=>fmt(r.c),1]];
+const rank=(a,n)=>a.slice(0,n).map((r,i)=>({...r,_i:i+1}));
+const cPart=[['#',r=>r._i],['قطعة الغيار',r=>esc(r.k)],['مرات الشراء',r=>fmt(r.c),1],['الكمية',r=>fmt(r.q),1],['القيمة (EGP)',r=>fmt(r.v),1]];
+const cTop=[['#',r=>r._i],['التاريخ',r=>dstr(r.d)],['المورد',r=>esc(r.sup)],['القطعة',r=>esc(r.part)],['القسم',r=>esc(r.dept)],['الإجمالي شامل الضريبة (EGP)',r=>fmt(r.tot),1]];
+const cAll=[['التاريخ',r=>dstr(r.d)],['القسم',r=>esc(r.dept)],['المورد',r=>esc(r.sup)],['القطعة',r=>esc(r.part)],['الكمية',r=>fmt(r.qty),1],['قبل الضريبة',r=>fmt(r.net),1],['الضريبة',r=>fmt(r.vat),1],['الإجمالي (EGP)',r=>fmt(r.tot),1]];
+function render(){
+  const D=data();
+  $('cnt').textContent=`عدد السجلات المعروضة: ${fmt(D.f.length)} من ${fmt(recs.length)}`;
+  $('kpis').innerHTML=[['main','إجمالي المشتريات شامل الضريبة',egp(D.tot)],['','القيمة قبل الضريبة',egp(D.net)],['','ضريبة القيمة المضافة',egp(D.vat)],['','عدد عمليات الشراء',fmt(D.f.length)],['','عدد الموردين',fmt(D.sup.length)]].map(k=>`<div class="kpi ${k[0]}"><div class="l">${k[1]}</div><div class="v">${k[2]}</div></div>`).join('');
+  $('tSup').innerHTML=tbl(cSup(),rank(D.supS,50));
+  $('tPart').innerHTML=tbl(cPart,rank(D.partS,50));
+  $('tTop').innerHTML=tbl(cTop,rank(D.top,20).map(r=>({...r})));
+  $('tAll').innerHTML=tbl(cAll,[...D.f].sort((a,b)=>(b.d||0)-(a.d||0)));
+  const o={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{rtl:true,callbacks:{label:c=>' '+egp(c.parsed.y??c.parsed.x)}}}};
+  mk('c1',{type:'bar',data:{labels:D.mon.map(m=>mkLabel(m.k)),datasets:[{data:D.mon.map(m=>Math.round(m.v)),backgroundColor:'#1b8a8a',borderRadius:5}]},options:{...o,scales:{y:{ticks:{callback:v=>fmt(v)}}}}});
+  const ts=[...D.sup].sort((a,b)=>b.v-a.v).slice(0,10);
+  mk('c2',{type:'bar',data:{labels:ts.map(s=>s.k),datasets:[{data:ts.map(s=>Math.round(s.v)),backgroundColor:'#c99a2e',borderRadius:5}]},options:{...o,indexAxis:'y',scales:{x:{ticks:{callback:v=>fmt(v)}}}}});
+}
+function mk(id,cfg){charts[id]?.destroy();charts[id]=new Chart($(id),cfg)}
+document.querySelectorAll('.tabs').forEach(t=>t.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;tabs[t.dataset.t]=b.dataset.k;t.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));render()}));
+
+/* ---------- الطباعة ---------- */
+function showReport(){
+  const D=data(),img=charts.c1?charts.c1.toBase64Image():'';
+  $('report').innerHTML=`<div class="bar noprint"><button class="btn pri" onclick="window.print()">🖨 طباعة</button><button class="btn pri" style="background:#555" onclick="backHome()">⟵ العودة إلى الصفحة الرئيسية</button></div>
+  <h1>المشتريات – شركة المنيف فرع مصر</h1><div class="fl"><b>الفلاتر المستخدمة:</b> ${esc(filterText())}<br>تاريخ الطباعة: ${dt(new Date())}</div>
+  <h3>الملخص</h3>${tbl([['إجمالي المشتريات شامل الضريبة',r=>fmt(r[0]),1],['قبل الضريبة',r=>fmt(r[1]),1],['الضريبة',r=>fmt(r[2]),1],['عدد العمليات',r=>fmt(r[3]),1],['عدد الموردين',r=>fmt(r[4]),1]],[[D.tot,D.net,D.vat,D.f.length,D.sup.length]])} <div style="font-size:11px">* جميع المبالغ بالجنيه المصري (EGP)</div>
+  <h3>المشتريات الشهرية</h3>${img&&D.mon.length?`<img src="${img}">`:''}${tbl([['الشهر',r=>mkLabel(r.k)],['الإجمالي (EGP)',r=>fmt(r.v),1],['العمليات',r=>fmt(r.c),1]],D.mon)}
+  <h3>ترتيب الموردين</h3>${tbl(cSup(),rank(D.supS,30))}
+  <h3>أكثر قطع الغيار شراءً</h3>${tbl(cPart,rank(D.partS,30))}
+  <h3>أكبر عمليات الشراء</h3>${tbl(cTop,rank(D.top,20))}
+  <h3>تفاصيل العمليات</h3>${tbl(cAll,[...D.f].sort((a,b)=>(b.d||0)-(a.d||0)))}`;
+  document.body.classList.add('rep');scrollTo(0,0);setTimeout(()=>window.print(),400);
+}
+function backHome(){document.body.classList.remove('rep')}
+addEventListener('afterprint',()=>{});
+
+/* ---------- تكبير/تصغير ---------- */
+function zoom(d){zl=Math.max(-3,Math.min(6,zl+d));localStorage.setItem('zl',zl);document.documentElement.style.fontSize=(100+zl*10)+'%';document.body.style.zoom=1+zl*.1}
+zoom(0);
+
+/* ---------- تشغيل ---------- */
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+init();
+</script>
+</body>
+</html>
